@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grades</title>
+</head>
+<body>
+    <h1>Enter a mark</h1>
+    <div>
+        <input type="text" onchange="textInputed()" id="inputText" />
+    </div>
+    <div>
+        output <span id="outputText"></span>
+    </div>
+
+    <script>
+        function textInputed(){
+            var input = document.getElementById("inputText").value;
+             var output
+            if(isNaN(input)){
+                 output = "please enter a number";
+            }else if (input < 0 ){output = "enter a number between 0 and 100";
+            }
+
+            document.getElementById("outputText").innerHTML = output;
+        }
+    </script>
+</body>
+</html>
