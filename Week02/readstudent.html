@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Read a Student</title>
+</head>
+<body>
+
+<h1> Read a student </h1>
+<form>
+    <div>id <input type="text" id="studentId"/></div>
+    <div>name <input type="text" id="studentName"/></div>
+    <div><button id="create">create</button></div>
+</form>
+
+<script>
+    document.getElementById("create").addEventListener("click",
+        function (event){
+            event.preventDefault();
+            var student ={};
+            student.id = document.getElementById("studentId").value;
+            student.name = document.getElementById("studentName").value;
+            console.log(student);
+
+    });
+
+</script>
+
+</body>
+</html>
