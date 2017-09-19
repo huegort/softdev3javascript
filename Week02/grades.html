@@ -19,7 +19,20 @@
              var output
             if(isNaN(input)){
                  output = "please enter a number";
-            }else if (input < 0 ){output = "enter a number between 0 and 100";
+            }else if (input < 0 ){
+                output = "enter a number between 0 and 100";
+            }else if (input < 40 ){
+                output = "fail";
+            }else if (input < 55 ){
+                output = "d";
+            }else if (input < 70 ){
+                output = "C";
+            }else if (input < 85 ){
+                output = "B";
+            }else if (input <= 100 ){
+                output = "A";
+            }else {
+                output = "please enter a mark less than 100";
             }
 
             document.getElementById("outputText").innerHTML = output;
