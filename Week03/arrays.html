@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>arrays</title>
+</head>
+<body>
+<div>
+    A<input type = "text" onchange="inputChanged(this)"/>
+</div>
+<div><button onclick="popButtonClicked()">pop</button></div>
+
+<div>lenght: <span id="arrayLenght"></span>
+    <div id="arrayDetails"></div>
+</div>
+
+<script>
+    var stuffs =[];
+    function inputChanged(inputElem){
+        var input = inputElem.value;
+        inputElem.value="";
+        stuffs.push(input)
+        displayArray();
+    }
+    function popButtonClicked(){
+        var text = stuffs.pop();
+        console.log(text);
+        displayArray()
+    }
+    function displayArray(){
+        document.getElementById("arrayLenght").innerHTML = stuffs.length;
+        document.getElementById("arrayDetails").innerHTML = stuffs;
+    }
+</script>
+</body>
+</html>
