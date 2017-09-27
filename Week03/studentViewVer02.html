@@ -33,7 +33,7 @@
             </td>
         </tr>
         <tr>
-            <td>1</td>
+            <td>3</td>
             <td>joe</td>
             <td>
                 <button onclick="delete(3)">delete</button>
@@ -46,15 +46,6 @@
 <div style="display: none" id="buttonsTemplate">
     <button onclick="delete(XXX)">delete</button>
     <button onclick="update(XXX)">update</button>
-
-</div>
-<div style="display: none" id="tdTemplate">
-    <td>XXXID</td>
-    <td>XXXNAME</td>
-    <td>
-        <button onclick="delete(XXXID)">delete</button>
-        <button onclick="update(XXXID)">update</button>
-    </td>
 
 </div>
 
@@ -87,14 +78,7 @@
         buttonText = buttonText.replace("XXX",student.id);
         buttonText = buttonText.replace("XXX",student.id);
         cell.innerHTML = buttonText;
-        /*
-          var tdText = document.getElementById("tdTemplate").innerHTML;
-            tdText = tdText.replace("XXXID",student.id);
-            tdText = tdText.replace("XXXNAME",student.name);
-            tdText = tdText.replace("XXXID",student.id);
-            tdText = tdText.replace("XXXID",student.id);
-            row.innerHTML = buttonText;
-        */
+
     }
 
 
