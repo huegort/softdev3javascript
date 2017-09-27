@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Form Version 2</title>
+</head>
+<body>
+
+<div id="tabA" style="display: block">
+    id <input type="number" id="inputId"><br/>
+    name <input type="text" id="inputName"><br/>
+    <button onclick="createStudent()">Create</button>
+
+</div>
+<div id="tabB" style="display: block">
+    <h1> Students</h1>
+    <table id ="studentTable">
+        <tr><th>id</th><th>name</th><th> action</th></tr>
+        <tr>
+            <td>1</td>
+            <td>joe</td>
+            <td>
+                <button onclick="delete(1)">delete</button>
+                <button onclick="update(1)">update</button>
+            </td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>joe</td>
+            <td>
+                <button onclick="delete(2)">delete</button>
+                <button onclick="update(2)">update</button>
+            </td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>joe</td>
+            <td>
+                <button onclick="delete(3)">delete</button>
+                <button onclick="update(3)">update</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div style="display: none" id="buttonsTemplate">
+    <button onclick="delete(XXX)">delete</button>
+    <button onclick="update(XXX)">update</button>
+
+</div>
+<div style="display: none" id="tdTemplate">
+    <td>XXXID</td>
+    <td>XXXNAME</td>
+    <td>
+        <button onclick="delete(XXXID)">delete</button>
+        <button onclick="update(XXXID)">update</button>
+    </td>
+
+</div>
+
+<script>
+    function createStudent(){
+        var idElem = document.getElementById("inputId");
+        var nameElem = document.getElementById("inputName");
+        var student = {};
+        student.id = idElem.value;
+        student.name = nameElem.value;
+        idElem.value = "";
+        nameElem.value="";
+        insertStudentIntoTable(student);
+
+    }
+    function insertStudentIntoTable(student){
+        console.log(student);
+        var studentTable = document.getElementById("studentTable");
+        var row = studentTable.insertRow(-1);
+        var cell = row.insertCell(0);
+        cell.innerHTML = student.id;
+        cell = row.insertCell(1);
+        cell.innerHTML = student.name;
+        cell = row.insertCell(2);
+        /*
+        cell.innerHTML = "<button onclick='delete()'>delete</button>\n"+
+            "<button onclick='update()'>update</button>";
+            */
+        var buttonText = document.getElementById("buttonsTemplate").innerHTML;
+        buttonText = buttonText.replace("XXX",student.id);
+        buttonText = buttonText.replace("XXX",student.id);
+        cell.innerHTML = buttonText;
+        /*
+          var tdText = document.getElementById("tdTemplate").innerHTML;
+            tdText = tdText.replace("XXXID",student.id);
+            tdText = tdText.replace("XXXNAME",student.name);
+            tdText = tdText.replace("XXXID",student.id);
+            tdText = tdText.replace("XXXID",student.id);
+            row.innerHTML = buttonText;
+        */
+    }
+
+
+</script>
+
+</body>
+</html>
