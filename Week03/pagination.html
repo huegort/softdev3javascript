@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pagination 01</title>
+</head>
+<body>
+<h1>Pagination demonstration</h1>
+
+<div id="tabA" style="display: block">
+    <div>
+        info A
+    </div>
+    <button style="alignment: right" onclick="next('tabA','tabB')">next</button>
+</div>
+<div id="tabB" style="display: none">
+    <div>
+        info B
+    </div>
+    <button style="alignment: right" onclick="next('tabB','tabA')">prev</button>
+    <button style="alignment: right" onclick="next('tabB','tabC')">next</button>
+</div>
+<div id="tabC" style="display: none">
+    <div>
+        info C
+    </div>
+    <button style="alignment: right" onclick="next('tabC','tabB')">prev</button>
+</div>
+<script>
+    function next(thisDivId, nextDivId){
+        var thisDiv = document.getElementById(thisDivId);
+        var nextDiv = document.getElementById(nextDivId);
+        thisDiv.style.display = "none";
+        nextDiv.style.display = "block";
+        console.log("coming from "+thisDivId + "\n\tgoing to \""+nextDivId+"\"");
+    }
+
+</script>
+
+</body>
+</html>
