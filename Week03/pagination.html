@@ -11,28 +11,28 @@
     <div>
         info A
     </div>
-    <button style="alignment: right" onclick="next('tabA','tabB')">next</button>
+    <button style="alignment: right" onclick="swap('tabA','tabB')">next</button>
 </div>
 <div id="tabB" style="display: none">
     <div>
         info B
     </div>
-    <button style="alignment: right" onclick="next('tabB','tabA')">prev</button>
-    <button style="alignment: right" onclick="next('tabB','tabC')">next</button>
+    <button style="alignment: right" onclick="swap('tabB','tabA')">prev</button>
+    <button style="alignment: right" onclick="swap('tabB','tabC')">next</button>
 </div>
 <div id="tabC" style="display: none">
     <div>
         info C
     </div>
-    <button style="alignment: right" onclick="next('tabC','tabB')">prev</button>
+    <button style="alignment: right" onclick="swap('tabC','tabB')">prev</button>
 </div>
 <script>
-    function next(thisDivId, nextDivId){
-        var thisDiv = document.getElementById(thisDivId);
-        var nextDiv = document.getElementById(nextDivId);
-        thisDiv.style.display = "none";
-        nextDiv.style.display = "block";
-        console.log("coming from "+thisDivId + "\n\tgoing to \""+nextDivId+"\"");
+    function swap(hideElemId, showElemId){
+        var hideElem = document.getElementById(hideElemId);
+        var showElem = document.getElementById(showElemId);
+        hideElem.style.display = "none";
+        showElem.style.display = "block";
+        console.log("coming from "+hideElemId + "\n\tgoing to \""+showElemId+"\"");
     }
 
 </script>
