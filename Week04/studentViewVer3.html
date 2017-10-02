@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Form Version 2</title>
+</head>
+<body>
+
+<div id="tabA" style="display: block">
+    id <input type="number" id="inputId"><br/>
+    name <input type="text" id="inputName"><br/>
+    <button onclick="createStudent()">Create</button>
+
+</div>
+<div id="tabB" style="display: block">
+    <h1> Students</h1>
+    <table id ="studentTable">
+        <tr><th>id</th><th>name</th><th> action</th></tr>
+        <tr id="1">
+            <td>1</td>
+            <td>joe</td>
+            <td>
+                <button onclick="deleteRow(1)">delete</button>
+                <button onclick="update(1)">update</button>
+            </td>
+        </tr>
+        <tr id="2">
+            <td>2</td>
+            <td>joe</td>
+            <td>
+                <button onclick="deleteRow(2)">delete</button>
+                <button onclick="update(2)">update</button>
+            </td>
+        </tr>
+        <tr id="3">
+            <td>3</td>
+            <td>joe</td>
+            <td>
+                <button onclick="deleteRow(3)">delete</button>
+                <button onclick="update(3)">update</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div style="display: none" id="buttonsTemplate">
+    <button onclick="deleteRow(XXX)">delete</button>
+    <button onclick="update(XXX)">update</button>
+
+</div>
+
+<script>
+    function createStudent(){
+        var idElem = document.getElementById("inputId");
+        var nameElem = document.getElementById("inputName");
+        var student = {};
+        student.id = idElem.value;
+        student.name = nameElem.value;
+        idElem.value = "";
+        nameElem.value="";
+        insertStudentIntoTable(student);
+
+    }
+    function insertStudentIntoTable(student){
+        console.log(student);
+        var studentTable = document.getElementById("studentTable");
+        var row = studentTable.insertRow(-1);
+        row.setAttribute("id", student.id);
+        var cell = row.insertCell(0);
+        cell.innerHTML = student.id;
+        cell = row.insertCell(1);
+        cell.innerHTML = student.name;
+        cell = row.insertCell(2);
+        /*
+        cell.innerHTML = "<button onclick='delete()'>delete</button>\n"+
+            "<button onclick='update()'>update</button>";
+            */
+        var buttonText = document.getElementById("buttonsTemplate").innerHTML;
+        buttonText = buttonText.replace("XXX",student.id);
+        buttonText = buttonText.replace("XXX",student.id);
+        cell.innerHTML = buttonText;
+    }
+
+    function deleteRow(rowId){
+        var row = document.getElementById(rowId);
+        var parent = row.parentNode;
+        parent.removeChild(row);
+    }
+
+
+</script>
+
+</body>
+</html>
