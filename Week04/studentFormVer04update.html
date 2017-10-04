@@ -21,6 +21,9 @@ Q4: Write the updateTable(student,rowId) function
 <body>
 <div id="createUpdateForm">
     <h1>Form</h1>
+    <!-- another way is to use hidden field -->
+    <input type="hidden" id="rowId"/>
+
     id <input type="text" id="studentId" name="studentId"/>
     <br/>
     name <input type="text" id="studentName" name="studentName"/>
@@ -33,7 +36,7 @@ Q4: Write the updateTable(student,rowId) function
 <table>
 
     <tr><th>id</th><th>name</th><th>delete</th><th>update</th></tr>
-    <tr id ="1">
+    <tr id ="1">fghfg
         <td>1</td>
         <td>joe</td>
         <td><span>
@@ -65,26 +68,39 @@ function showUpdateForm(buttonElem){
     //console.log(rowId);
 
     var student = {};
-     student.id      = row.getElementsByTagName("td")[0].firstChild.nodeValue;
-    student.name    = row.getElementsByTagName("td")[1].firstChild.nodeValue;
+     student.id      = row.getElementsByTagName("td")[0].innerHTML;
+    student.name    = row.getElementsByTagName("td")[1].innerHTML;
 
     populateUpdateForm(student, rowId)
 }
 function populateUpdateForm(student, rowId){
     console.log(student);
+
+    document.getElementById("rowId").value = rowId;
     document.getElementById("studentId").value = student.id;
     document.getElementById("studentName").value = student.name;
     var button = document.getElementById("createUpdateButton");
     button.innerHTML = "Update";
-        button.onclick = function(){
-            console.log("update clicked "+rowId);
-            var student = {};
-            student.id      = document.getElementById("studentId").value
-            student.name    = document.getElementById("studentName").value;
-            console.log(student);
-            updateRow(student, rowId);
+    button.onclick = updateButtonClicled;
+}
+function updateButtonClicled(){
+        var rowId = document.getElementById("rowId").value;
+        console.log("update clicked "+rowId);
+        var student = {};
+        student.id      = document.getElementById("studentId").value
+        student.name    = document.getElementById("studentName").value;
+        console.log(student);
+        document.getElementById("rowId").value = "";
+        document.getElementById("studentId").value = "";
+        document.getElementById("studentName").value = "";
 
-        }
+        var button = document.getElementById("createUpdateButton");
+        button.innerHTML = "XXX";
+        button.onclick = "";
+
+    updateRow(student, rowId);
+
+
 }
 function updateRow(student, rowId){
     console.log("about to update row "+rowId);
