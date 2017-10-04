@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<!--
+Q1: Draw a diagram of the DOM tree for the table and one of the rows
+Q2: Write the updateRow function so that it puts the contents of the data cells into an object
+    and prints out the object to the console
+Q3: Write a function called populateUpdateForm that takes a student Object and a row ID that:
+        a) sets the input for id to have a value of the student Id
+        b) sets the input for name to have a value of the student name
+        c) sets the onclick of the button to be the function updateTable( rowId)
+        d) sets the text of the button to be update
+Q4: Write the updateTable(student,rowId) function
+
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>read from row</title>
+</head>
+<body>
+<div id="createUpdateForm">
+    <h1>Form</h1>
+    id <input type="text" id="studentId" name="studentId"/>
+    <br/>
+    name <input type="text" id="studentName" name="studentName"/>
+    <br/>
+    <button id="createUpdateButton">XXX</button>
+
+</div>
+<div id="showAll">
+<h1> Students</h1>
+<table>
+
+    <tr><th>id</th><th>name</th><th>delete</th><th>update</th></tr>
+    <tr id ="1">
+        <td>1</td>
+        <td>joe</td>
+        <td><span>
+            <button onclick="deleteRow(this)">
+                delete Me
+            </button>
+        </span>
+        </td>
+        <td>
+            <button onclick="showUpdateForm(this)">
+                update
+            </button>
+
+        </td>
+    </tr>
+    <tr id = "2"><td>2</td><td>mick</td>    <td><button onclick="deleteRow(this)">delete Me</button></td><td><button onclick="showUpdateForm(this)">update</button></td></tr>
+    <tr id = "3"><td>3</td><td>mary</td>    <td><button onclick="deleteRow(this)">delete Me</button></td><td><button onclick="showUpdateForm(this)">update</button></td></tr>
+    <tr id = "4"><td>4</td><td>martha</td>  <td><button onclick="deleteRow(this)">delete Me</button></td><td><button onclick="showUpdateForm(this)">update</button></td></tr>
+    <tr id = "5"><td>5</td><td>paul</td>    <td><button onclick="deleteRow(this)">delete Me</button></td><td><button onclick="showUpdateForm(this)">update</button></td></tr>
+    <tr id = "6"><td>6</td><td>rick</td>    <td><button onclick="deleteRow(this)">delete Me</button></td><td><button onclick="showUpdateForm(this)">update</button></td></tr>
+</table>
+</div>
+</body>
+
+<script>
+function showUpdateForm(buttonElem){
+    var row = buttonElem.closest("tr");
+    var rowId = row.getAttribute("id");
+    //console.log(rowId);
+
+    var student = {};
+     student.id      = row.getElementsByTagName("td")[0].firstChild.nodeValue;
+    student.name    = row.getElementsByTagName("td")[1].firstChild.nodeValue;
+
+    populateUpdateForm(student, rowId)
+}
+function populateUpdateForm(student, rowId){
+    console.log(student);
+    document.getElementById("studentId").value = student.id;
+    document.getElementById("studentName").value = student.name;
+    var button = document.getElementById("createUpdateButton");
+    button.innerHTML = "Update";
+        button.onclick = function(){
+            console.log("update clicked "+rowId);
+            var student = {};
+            student.id      = document.getElementById("studentId").value
+            student.name    = document.getElementById("studentName").value;
+            console.log(student);
+            updateRow(student, rowId);
+
+        }
+}
+function updateRow(student, rowId){
+    console.log("about to update row "+rowId);
+    var row = document.getElementById(rowId);
+    row.getElementsByTagName("td")[0].innerHTML = student.id;
+    row.getElementsByTagName("td")[1].innerHTML = student.name;
+}
+
+
+</script>
+</html>

@@ -11,20 +11,23 @@
     <div>
         info A
     </div>
-    <button style="alignment: right" onclick="swap('tabA','tabB')">next</button>
+    <span style="text-align: center"> <strong>1</strong>2,3</span>
+    <button style="float: right" onclick="swap('tabA','tabB')">next</button>
 </div>
 <div id="tabB" style="display: none">
     <div>
         info B
     </div>
-    <button style="alignment: right" onclick="swap('tabB','tabA')">prev</button>
-    <button style="alignment: right" onclick="swap('tabB','tabC')">next</button>
+    <button  onclick="swap('tabB','tabA')">prev</button>
+    <span style="align-self: center"> 1,<strong>2</strong>,3</span>
+    <button style="float: right" onclick="swap('tabB','tabC')">next</button>
 </div>
 <div id="tabC" style="display: none">
     <div>
         info C
     </div>
-    <button style="alignment: right" onclick="swap('tabC','tabB')">prev</button>
+    <button  onclick="swap('tabC','tabB')">prev</button>
+    <span style="align-self: center"> 1,2,<strong>3</strong></span>
 </div>
 <script>
     function swap(hideElemId, showElemId){
