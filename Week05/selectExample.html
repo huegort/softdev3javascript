@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select example</title>
+</head>
+<body>
+<h1>Select Example</h1>
+
+Select a mammal
+<select name="mammal" id="mammal">
+    <option value="cat">Cat</option>
+    <option value="dog">Dog</option>
+    <option value="horse">Horse</option>
+    <option value="monkey">Monkey</option>
+    <option value="donkey">Donkey</option>
+</select>
+
+
+<select name="breeds" id="breeds">
+</select>
+
+<script>
+    var selectElem = document.getElementById("mammal");
+    var breeds ={cat:["siames","pole","tortashell"],
+        dog:["Boxer","Mastiff"],
+        horse:["shetland","Arab"],
+        monkey:["Chimp","Oranutan"],
+        donkey:["Shrek's one","some other"],
+    }
+
+    selectElem.value="dog";
+
+    selectElem.onchange= function(){
+        console.log(selectElem.value);
+        populateBreeds(selectElem.value);
+    }
+
+    function populateBreeds(species){
+        var breedsElem = document.getElementById("breeds");
+         breedsElem.innerHTML ="";
+        var breedsToAdd = breeds[species];
+        for (var i = 0; i<breedsToAdd.length; i++){
+            var opt = document.createElement('option');
+            opt.value = breedsToAdd[i];
+            opt.innerHTML = breedsToAdd[i];
+            breedsElem.appendChild(opt);
+        }
+
+
+    }
+
+</script>
+
+</body>
+</html>

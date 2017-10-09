@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Dates</title>
+</head>
+<body>
+
+<h1>sample with dates</h1>
+enter a date <input type="date" name="aDate" id="aDate">
+
+<script>
+    document.getElementById("aDate").onchange = function(){
+        var dateString = document.getElementById("aDate").value;
+        console.log(dateString);
+        var date = new Date(dateString);
+
+        console.log(date);
+        console.log(date.toLocaleDateString());
+
+        var in30days = new Date(date);
+        //var in30days = date;
+
+        in30days.setDate(in30days.getDate()+30);
+        console.log("in 30 days "+in30days.toDateString());
+
+        console.log("original date is "+date.toDateString());
+        console.log("my nice format :"+date.getDay()+" "+date.getDate()+"....");
+
+        var dateFormat = require('dateformat');
+
+        dateFormat(date, "dddd, dS mmmm, yyyy, h:MM:ss TT");
+
+    }
+    </script>
+</body>
+</html>
