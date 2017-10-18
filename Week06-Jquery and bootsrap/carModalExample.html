@@ -89,8 +89,13 @@
     });
     function getCarFromRow(row){
         var car = {};
-        car={regNum:"12MODUMB",make:"dumby too",model:"dumby three"};// for testing only
-        // here read from row
+        //car={regNum:"12MODUMB",make:"dumby too",model:"dumby three"};// for testing only
+        var tds = row.find("td");
+        car.regNum = tds[0].innerHTML;
+        car.make = tds[1].innerHTML;
+        car.model = tds[2].innerHTML;
+
+
         return car;
     }
     function populateCreateUpdateForm(car){
@@ -103,6 +108,8 @@
 
     function closeAndCleanCreateUpdateModal(){
         $('#createUpdateTitle').text("Clean");
+        var form = $("#createUpdateForm");
+        form.find("input").val("");
 
         $('#carCreateUpdateModal').modal('hide');
     }
