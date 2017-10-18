@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal Example</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="carCreateUpdateModal" class="modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="createUpdateTitle" class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="createUpdateForm">
+                    <input type="text" name="regNum">
+                    <input type="text" name="make">
+                    <input type="text" name="model">
+                </div>
+                <div class="modal-footer">
+                    <button id="doCreateButton" type="button" class="btn btn-primary" >Create</button>
+                    <button id="doUpdateButton" type="button" class="btn btn-primary" >Update</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button data-toggle="modal" data-target="#carCreateUpdateModal">Button to open modal</button>
+    <h1>Cars with modals</h1>
+
+    <button id="createButton">create</button>
+    <table class="table">
+        <tr>
+            <th>Reg</th><th>Make</th><th>model</th><th>update</th>
+        </tr>
+        <tr id="1">
+            <td>12MO1243</td><td>ford</td><td>modeo</td>
+            <td>
+                <button class="updateButton">update</button>
+            </td>
+        </tr>
+        <tr id="2">
+            <td>171 D 1243</td><td>Fiat</td><td>Rust Bucket</td>
+            <td>
+                <button class="updateButton">update</button>
+            </td>
+        </tr>
+    </table>
+
+<script>
+    $(function(){
+        $("#createButton").click(function(event){
+            $("#doCreateButton").show();
+            $("#doUpdateButton").hide();
+            $('#createUpdateTitle').text("Create");
+            // other stuff
+            $('#carCreateUpdateModal').modal('show')
+        });
+        $("#doCreateButton").click(function(event){
+            console.log("do create");
+            closeAndCleanCreateUpdateModal();
+        });
+        $(".updateButton").click(function(event){
+            console.log("update clicked")
+            var row = $(this).closest("tr");
+            var car = getCarFromRow(row);
+            populateCreateUpdateForm(car);
+
+            // $("#doCreateUpdateButton").click(doUpdate);
+            $("#doCreateButton").hide();
+            $("#doUpdateButton").show();
+            $('#createUpdateTitle').text("Update "+row.attr('id'));
+            // other stuff
+            $('#carCreateUpdateModal').modal('show')
+        });
+        $("#doUpdateButton").click(function(event){
+            console.log("do Update");
+            closeAndCleanCreateUpdateModal();
+        });
+
+    });
+    function getCarFromRow(row){
+        var car = {};
+        car={regNum:"12MODUMB",make:"dumby too",model:"dumby three"};// for testing only
+        // here read from row
+        return car;
+    }
+    function populateCreateUpdateForm(car){
+        console.log("populate called");
+        var form = $("#createUpdateForm");
+        $.each(car,function(key,value){
+            form.find("input[name='"+key+"']").val(value);
+        })
+    }
+
+    function closeAndCleanCreateUpdateModal(){
+        $('#createUpdateTitle').text("Clean");
+
+        $('#carCreateUpdateModal').modal('hide');
+    }
+</script>
+
+
+
+</body>
+</html>

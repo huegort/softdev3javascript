@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>jquery example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="carForm">
+    colour <input type="text" name="colour "/><br/>
+    regNumber <input type="text" name="reg"/><br/>
+    make<input type="text" name="make"/><br/>
+    model <select name="model">
+        <option value="ford">ford</option>
+        <option value="fiat">fiat</option>
+    </select><br/>
+
+    <button id="createButton"> create</button>
+</div>
+<div id="debug"></div>
+<div id="carDisplay" style="display: none">
+    <table id="carTable">
+        <tr>
+            <th>regNumber</th>
+            <th>make</th>
+            <th>model</th>
+            <th>update</th>
+            <th>delete</th>
+        </tr>
+    </table>
+
+
+</div>
+
+
+<script>
+    $(function(){
+        $("#createButton").click(function(){
+            onCreate(this)
+        });
+    });
+
+
+    function onCreate(thisElem){
+       var car = {}
+       //car.toString=function(){return car.reg + " "+car.col;};
+        $("#carForm input, #carForm select").each(function (index) {
+           var input = $(this);
+           console.log(' Name: ' + input.attr('name') + ' Value: ' + input.val());
+            car[input.attr('name')] =  input.val();
+       })
+        //$("#carForm").hide();
+       //$("#debug").text(car);
+        console.log(car);
+       populateCarTable(car);
+    }
+    var nextRowId=1;
+    function populateCarTable(car){
+        var carTable = $("#carTable")[0];
+        var row = carTable.insertRow(-1);
+        //var row = $("#carTable").insertRow(-1);
+        var rowId = nextRowId++
+        row.setAttribute("id", rowId);
+       /* $.each(car, function(key,val){
+            console.log("key : "+key+" ; value : "+val);
+            if(key != "colour") {
+                var td = row.insertCell(-1);
+                td.innerHTML = val;
+            }
+        });*/
+        var td = row.insertCell(-1);
+        td.innerHTML = car.regNum;
+        td = row.insertCell(-1);
+        td.innerHTML = car.make;
+        td = row.insertCell(-1);
+        td.innerHTML = car.model;
+
+        $("#carDisplay").show();
+    }
+
+</script>
+
+</body>
+</html>
