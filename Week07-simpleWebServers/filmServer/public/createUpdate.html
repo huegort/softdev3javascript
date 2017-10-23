@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>Create Update</title>
+</head>
+<body>
+<h1>Create a Film</h1>
+<div id="createUpdateFilmForm">
+    <input type="hidden" name="id" value="-1"/>
+    <div class="form-group">
+        <label for="inputTitle">title</label>
+        <input type="text" name="title" class="form-control" id="inputTitle"  placeholder="Enter Title">
+    </div>
+    <div class="form-group">
+        <label for="InputDatePublished">Date Published</label>
+        <input type="date" class="form-control" id="InputDatePublished" >
+    </div>
+
+    <button id="createButton" type="submit" class="btn btn-primary">create</button>
+
+</div>
+<script>
+$(function(){
+    $("#createButton").click(function(){
+        var film = getFilmFromForm();
+        .ajax({
+            url:""
+        })
+    });
+
+
+});
+    function getFilmFromForm (){
+        var film = {};
+        $("#createUpdateFilmForm input").each(function(index){
+            var input = $(this);
+            //console.log(' Name: ' + input.attr('name') + ' Value: ' + input.val());
+            film[input.attr('name')] =  input.val();
+
+        })
+        return film;
+
+    }
+</script>
+
+
+
+
+</body>
+</html>
