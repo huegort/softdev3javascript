@@ -6,21 +6,23 @@ var options = {
     docroot :"public/",
     defaultPage :"index.html"
 }
-var routing=[{route:"/car",processingFunction: displayAllCars},
-    {route:"/films",processingFunction: displayAllFilms},
-            ]
+var routes= {
+    GET: [{route: "/car", processingFunction: displayAllCars},
+        {route: "/films", processingFunction: displayAllFilms},
+    ]
+}
 
 var server = http.createServer( function (request, response) {
     var parsedUrl = url.parse(request.url);
     var pathname = parsedUrl.pathname;
-    var method = parsedUrl.method;
+    var method = request.method;
     console.log("got a request to "+method+pathname.toString());
     if (pathname == "/"){pathname = pathname+":"+options.defaultPage;}
-
-    for (var i = 0; i< routing.length ; i++){
-        var route = routing[i].route;
+    var getRoutes= routes.GET;
+    for (var i = 0; i< getRoutes.length ; i++){
+        var route = getRoutes[i].route;
         if (pathname == route){
-            var functionToCall = routing[i].processingFunction;
+            var functionToCall = getRoutes[i].processingFunction;
             functionToCall(request, response);
             return
         }
