@@ -1,16 +1,15 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 
-app.get('/', function (req, res) {
-    res.send('Hello World');
-})
-app.get('/car', function (req, res) {
-    res.send('display all cars');
-})
-app.post ('/car', function (req, res) {
-    res.send('display all cars');
-})
+var carRouter = require('./routes/Car.js');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(express.static('public'));
+app.use("/car", carRouter);
+
 
 var server = app.listen(3003, function () {
     var host = server.address().address
