@@ -18,11 +18,14 @@ var sqlCreate = "create table students (id int, name varchar(250));";
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    con.query(sqlCreate, function (err, result) {
-        if (err) throw err;
-        console.log("Table created");
+    var sql = "create table blah (id int, name varchar(250));";
+    con.query(sql, function(err,result){
+        if (err){
+            console.log(JSON.stringify(err.sqlMessage));
+            console.log("SQL:"+err.sql);
+            throw err;
+        }
+        console.log(JSON.stringify(result));
     });
-
-
-
 });
+console.log("yo");

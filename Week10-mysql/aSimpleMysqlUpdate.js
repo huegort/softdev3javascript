@@ -12,36 +12,20 @@ var con = mysql.createConnection({
     password: "",
     database:"softdev3"
 });
-var sqlUpdate = "update students set name='updated' where id=1);";
-var sqlUpdateFromObject = "insert into students set ?;";
+var sqlUpdate = "update students set name='updated' where id=1;";
+var sqlUpdateFromObject = "update students set ? where id = ?;";
 
-var valuesAsArray = [2,"fred"];
-var multipleValues= [
-    [5,"frank"],
-    [5,"Fatima"],
-    [5,"Greg"],
-    [4,"AliBabba"]];
-var valuesAsObject = {id:3,name:"mary"};
-
-
+student = {id:3, name:"updated mary"};
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected!");
-    con.query(sqlInsert, function (err, result) {
+    con.query(sqlUpdate, function (err, result) {
         if (err) throw err;
-        console.log("row inserted "+JSON.stringify(result));
+        console.log("row updated "+JSON.stringify(result));
     });
-    con.query(sqlInsertFromVars,valuesAsArray, function (err, result) {
+    con.query(sqlUpdateFromObject,[student, student.id], function (err, result) {
         if (err) throw err;
-        console.log("row inserted "+JSON.stringify(result));
-    });
-    con.query(sqlInsertMultiple,[multipleValues], function (err, result) {
-        if (err) throw err;
-        console.log("row inserted "+JSON.stringify(result));
-    });
-    con.query(sqlInsertFromObject,valuesAsObject, function (err, result) {
-        if (err) throw err;
-        console.log("row inserted "+JSON.stringify(result));
+        console.log("row update from obj "+JSON.stringify(result));
     });
 
 });

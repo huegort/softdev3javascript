@@ -17,11 +17,11 @@ var sqlInsertFromVars = "insert into students (id, name) values (?,?);";
 var sqlInsertMultiple = "insert into students (id, name) values ?;";
 var sqlInsertFromObject = "insert into students set ?;";
 
-var valuesAsArray = [2,"fred"];
+var valuesAsArray = ["10","fred"];
 var multipleValues= [
     [5,"frank"],
-    [5,"Fatima"],
-    [5,"Greg"],
+    [6,"Fatima"],
+    [7,"Greg"],
     [4,"AliBabba"]];
 var valuesAsObject = {id:3,name:"mary"};
 
