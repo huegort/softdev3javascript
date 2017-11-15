@@ -14,7 +14,7 @@ var genericDAO = {
     tableName:"students2",
     mapping:{
         id:{colName:'id', type:"INT"},
-        name:{colName:'fullname', type:"varchar(20)"},
+        name:{colName:'fullname', type:"varchar(250)"},
         age:{colName:'age', type:"INT"}
     },
     attributes:[],
