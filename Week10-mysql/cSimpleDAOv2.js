@@ -14,6 +14,9 @@ var studentDAO={
     findById:function(id,callback){
         callSQL(this.sqlFindById,[id],"FindById",callback);
     },
+    findByName:function(name,callback){
+        callSQL("select * from students where name = /",[name],"FindById",callback);
+    },
     insert:function(student,callback){
         callSQL(this.sqlInsert,[student.id,student.name],"insert",callback);
     },

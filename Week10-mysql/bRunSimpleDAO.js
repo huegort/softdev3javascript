@@ -13,6 +13,7 @@ dao.findById(1,function(result){
     // send response to client
 
 })
+
 dao.update({id:1,name:"updated Joe"});
 dao.findById(1,function(result){
     console.log(JSON.stringify(result));
