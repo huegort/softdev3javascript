@@ -2,7 +2,7 @@ var studentDAO= {
     sqlGetAll: "select * from students;",
     sqlFindById: "select * from students where id = ?;",
 };
-    function getAll(callback) {
+ function getAll(callback) {
     var con = getConnection(); // we need a different connection for each
     con.connect(function (err) {
         if (err) throw err;
