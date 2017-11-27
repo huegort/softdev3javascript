@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var counter = 0;
-var cars={}
+var cars={1:{id:1,reg:'123MO123',make:'ford',model:'modeo'}}
 
 /* GET car listing. */
 router.get('/', function(req, res, next) {

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button>Get External Content</button>
+
+<script>
+    $(function(){
+        $("button").click(function(){
+            $.ajax({
+                url: "/car/",
+                dataType: "json",
+                success: function (result) {
+                    console.log("Ford");
+
+                }
+            });
+        });
+        $.ajax({
+            url: "/car/",
+            dataType: "json",
+            success: function (result) {
+                console.log("Honda");
+
+            }
+        });
+        console.log("Masda");
+    })
+</script>
+
+
+</body>
+</html>
