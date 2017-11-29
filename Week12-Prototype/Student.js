@@ -8,6 +8,5 @@ Student = function(id, name, age){
     }
 }
 Student.prototype.canDrink = function(){
-    if (this.age< 18 ) return false;
-    return true
+    return (this.age < 18 )
 }

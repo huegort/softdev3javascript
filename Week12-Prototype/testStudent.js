@@ -16,3 +16,13 @@ Student.prototype.canDrink = function(){
 }
 
 console.log(s2.canDrink());
+var students = [];
+for (var i = 0; i<36; i++){
+    var age = Math.floor((Math.random()*36)+1);
+    var age = i;
+    students[i]= new Student("G0023","joe", age);
+}
+for (var i = 0; i< students.length;i++){
+    var student = students[i];
+    console.log(student.name+" "+student.age+" "+student.canDrink());
+}
