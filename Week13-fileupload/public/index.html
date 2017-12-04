@@ -1,16 +1,41 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
     <meta charset="UTF-8">
     <title>students</title>
 </head>
 <body>
-<form action="/filehandler/upload" enctype="multipart/form-data" method="POST">
+<h1>Upload and Download files</h1>
+This project demonstrates how to:
+<ol>
+    <li>Upload and read a file in the server</li>
+    <li>Save the file into a MYSQL database as binary</li>
+    <li>Read the file from the DB</li>
+    <li>Send the file out as request</li>
+</ol>
+<h3>upload to a file and see the data </h3>
+<form action="/filehandler/uploaddebug" enctype="multipart/form-data" method="POST">
     <input type="file" name="fileToUpload"><br/>
-    <button>upload the File</button>
+    <button>upload the File debug</button>
 
 </form>
 
+<h3>upload to a file</h3>
+<form action="/filehandler/uploadtofile" enctype="multipart/form-data" method="POST">
+    <input type="file" name="fileToUpload"><br/>
+    <button>upload the File to file</button>
+
+</form>
+<h3>upload to a file to a database</h3>
+<form action="/filehandler/uploadtodb" enctype="multipart/form-data" method="POST">
+    <input type="file" name="fileToUpload"><br/>
+    <button>upload the File to db</button>
+
+</form>
 </body>
 </html>
