@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>users</title>
+</head>
+<body>
+<a href="userform.html">create a new user</a>
+<table id="users-table">
+    <tr><th>username</th><th>update</th><th>delete</th></tr>
+
+</table>
+
+<script>
+$(function(){
+    $.ajax({
+        url:"/user/",
+        method:"GET",
+        data:"",
+        dataType:"JSON",
+        success:function(result){
+            console.log(result);
+            populateTable(result);
+        },
+        error:function(xhr,status,error){
+            console.log("error: "+error);
+        }
+
+    })
+})
+function populateTable(users){
+    var table = document.getElementById("users-table");
+
+    var len = users.length;
+    for (var i = 0; i<len; i++){
+        var user = users[i];
+        var row = table.insertRow(-1);
+        var cell = row.insertCell(0);
+        cell.innerHTML = user.username;
+    }
+
+}
+
+
+
+
+
+
+</script>
+
+</body>
+</html>
