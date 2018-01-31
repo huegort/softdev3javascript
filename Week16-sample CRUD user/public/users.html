@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <meta charset="UTF-8">
+    <title>view all users</title>
+</head>
+<body>
+<a href="createUser.html">create</a>
+<table id="userTable">
+    <tr>
+        <th>username</th>
+        <th>email</th>
+        <th></th>
+        <th></th>
+   </tr>
+
+
+</table>
+<table style="display: none">
+    <tr id="buttonTemplate">
+        <td><button>update</button></td>
+        <td><button>delete</button></td>
+    </tr>
+</table>
+
+<script>
+    $(function(){
+       $.ajax({
+           url:'/user/getAll',
+           method:'GET',
+           data:'',
+           dataType:'JSON',
+           success:function(result){
+               console.log(JSON.stringify(result));
+               populateTable(result);
+           }
+
+       });
+    });
+
+    function populateTable(users) {
+        var len = users.length;
+        var buttonsHtml = $('#buttonTemplate').html();
+        console.log("bt"+buttonsHtml)
+        for(var i =0; i< len; i++){
+            var user = users[i];
+
+            $("#userTable").append("<tr> <td>"+user.username+"</td><td>"+user.email+"</td>"+buttonsHtml+"</tr>");
+
+        }
+    }
+
+</script>
+
+
+</body>
+</html>
