@@ -7,50 +7,169 @@
     <title>view all users</title>
 </head>
 <body>
-<a href="createUser.html">create</a>
+<a href="createUser.html">create a User</a>
 <table id="userTable">
+
+</table>
+
+<table id="userTableTemplate" style="display: none">
     <tr>
         <th>username</th>
         <th>email</th>
         <th></th>
         <th></th>
-   </tr>
+        <th></th>
+    </tr>
 
 
 </table>
 <table style="display: none">
     <tr id="buttonTemplate">
-        <td><button>update</button></td>
-        <td><button>delete</button></td>
+        <td><button onclick="showUpdateEmail(this)">update email</button></td>
+        <td><button onclick="showUpdatePassword(this)">change password</button></td>
+        <td><button onclick="deleteUser(this)">delete</button></td>
     </tr>
 </table>
 
+<table id="updateEmailForm" style="display: none;">
+    <tr><td>username</td><td id="usernameForEmail"></td></tr>
+     <tr><td>email</td>
+         <td>
+             <input type="hidden" name="usernameForEmail">
+             <input name="email">
+         </td></tr>
+    <tr><td></td><td><button id="updateEmailButton">update</button></td></tr>
+</table>
+<table id="updatePasswordForm" style="display: none;">
+    <tr><td>username</td><td id="usernameForPassword"></td></tr>
+    <tr><td>password</td><td><input name="password">
+        <input type="hidden" name="usernameForPassword"></td>
+    </td></tr>
+    <tr><td></td><td><button id="updatePasswordButton">update</button></td></tr>
+ </table>
+
 <script>
     $(function(){
-       $.ajax({
-           url:'/user/getAll',
-           method:'GET',
-           data:'',
-           dataType:'JSON',
-           success:function(result){
-               console.log(JSON.stringify(result));
-               populateTable(result);
-           }
+        refreshTable();
 
-       });
+       $('#updateEmailButton').click(function(){
+           console.log("about to update email");
+           var username = $("input[name='usernameForEmail']").val();
+           var email = $("input[name='email']").val();
+           $("#updateEmailForm").hide();
+           $.ajax({
+               url:'/user/changeEmail',
+               method:'POST',
+               data:{username:username, email:email},
+               dataType:'JSON',
+               success:function(result){
+                   console.log("update"+JSON.stringify(result));
+                   refreshTable();
+               }
+           });
+       })
+        $('#updatePasswordButton').click(function(){
+             var username = $("input[name='usernameForPassword']").val();
+            var password = $("input[name='password']").val();
+            $("#updatePasswordForm").hide();
+            $.ajax({
+                url:'/user/changePassword',
+                method:'POST',
+                data:{username:username, password:password},
+                dataType:'JSON',
+                success:function(result){
+                    console.log("update"+JSON.stringify(result));
+                    refreshTable();
+                }
+            });
+        })
     });
 
+
+    function refreshTable(){
+        var headersHtml = $('#userTableTemplate').html();
+        $("#userTable").html(headersHtml);
+        $.ajax({
+            url:'/user/getAll',
+            method:'GET',
+            data:'',
+            dataType:'JSON',
+            success:function(result){
+                console.log("sadfg"+JSON.stringify(result));
+                populateTable(result);
+            }
+
+        });
+    }
+
+
     function populateTable(users) {
+       // console.log("in populate");
         var len = users.length;
         var buttonsHtml = $('#buttonTemplate').html();
         console.log("bt"+buttonsHtml)
         for(var i =0; i< len; i++){
             var user = users[i];
 
-            $("#userTable").append("<tr> <td>"+user.username+"</td><td>"+user.email+"</td>"+buttonsHtml+"</tr>");
+            $("#userTable").append("<tr id='"+user.username+"'> <td>"+user.username+"</td><td>"+user.email+"</td>"+buttonsHtml+"</tr>");
 
         }
     }
+    function showUpdateEmail(elem){
+        //this is javascript not jquery
+        var username = elem.closest("tr").getAttribute("id");
+        console.log("got username "+ username);
+        // I could read the details I want from the table row
+        // but I have decided to demonstrate how to get the user by ID
+        $.ajax({
+            url:'/user/findByUsername/'+username,
+            method:'GET',
+            data:'',
+            dataType:'JSON',
+            success:function(result){
+                //console.log("sadfg"+JSON.stringify(result));
+                var email = result[0].email;
+                console.log("got email "+email);
+                $("#usernameForEmail").html(username);
+                $("input[name='usernameForEmail']").val(username);
+                $("input[name='email']").val(email);
+                $("#updateEmailForm").show();
+                // should I enable and disable the button???
+            }
+
+        });
+    }
+    function showUpdatePassword(elem){
+        //this is javascript not jquery
+        var username = elem.closest("tr").getAttribute("id");
+        console.log("got username "+ username);
+        // I could read the details I want from the table row
+        // but I have decided to demonstrate how to get the user by ID
+        $("#usernameForPassword").html(username);
+
+        $("input[name='usernameForPassword']").val(username);
+        $("#updatePasswordForm").show();
+    }
+    function deleteUser(elem){
+        var username = elem.closest("tr").getAttribute("id");
+        $.ajax({
+            url:'/user/'+username,
+            method:'DELETE',
+            data:'',
+            dataType:'JSON',
+            success:function(result){
+                // we could use refreshTable();
+                // I have chosen to delete just the row
+                var row = document.getElementById(username);
+                var parent = row.parentNode;
+                parent.removeChild(row);
+            }
+
+        });
+
+    }
+
+
 
 </script>
 

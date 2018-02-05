@@ -22,7 +22,7 @@ router.post('/create', function(req, res, next) {
     var car = req.body;
     // put into a database
     cars[car.id] = car;
-    res.send("created?")
+    res.sendFile("C:\\Users\\ITS\\WebstormProjects\\softdev3javascript\\Week09-express2\\public\\index.html");
 });
 
 module.exports = router;

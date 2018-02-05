@@ -18,8 +18,9 @@ app.all('/welcome.html', function(req,res, next){
     console.log("checking welcome");
     if (req.session && req.session.check){
         next();
+    }else{
+        res.redirect('/login.html');
     }
-    res.redirect('/login.html');
 })
 
 app.use(express.static('./public'));
