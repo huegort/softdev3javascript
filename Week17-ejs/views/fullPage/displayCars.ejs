@@ -1,0 +1,33 @@
+<html>
+<head>
+    <% include ../partials/header %>
+</head>
+<body>
+
+<table>
+    <tr>
+        <th>id</th>
+        <th>reg</th>
+        <th>make</th>
+        <th>model</th>
+        <th>update</th>
+        <th>delete</th>
+    </tr>
+    <% cars.forEach(function(car) { %>
+    <tr id="<%= car.id%>">
+        <td><%= car.reg%></td>
+        <td><%= car.make%></td>
+        <td><%= car.model%></td>
+        <td><button >update</button></td>
+        <td><button >delete</button></td>
+
+    </tr>
+
+    <%});%>
+
+</table>
+
+
+</body>
+
+</html>
