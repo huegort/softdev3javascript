@@ -115,16 +115,18 @@ router.get('/download/:id', function(req,res,next){
             var fileName = result[0].file_name;
             var fileSize = result[0].file_size;
             var fileType = result[0].file_type;
-            var blob = result[0].file.data;
-            console.log("file is "+JSON.stringify(result[0].file));
-            console.log("blob is "+JSON.stringify(result[0].file));
+            var buffer = result[0].file;
+            var length = buffer.byteLength;
+           // console.log("file is "+JSON.stringify(result[0].file));
+           // console.log("blob is "+JSON.stringify(blob));
+           // console.log("blob is "+blob);
 
             res.writeHead(200, {
                 'Content-Type': fileType,
                 'Content-disposition': 'attachment;filename=' + fileName,
-                'Content-Length': blob.length
+                'Content-Length': length
             });
-            res.end(new Buffer(blob, 'binary'));
+            res.end(buffer);
 
         });
     });
