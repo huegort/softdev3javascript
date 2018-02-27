@@ -9,9 +9,9 @@ router.get("/test", function(req,res){
 
 })
 router.get("/form/:name", function(req,res){
-    var student = {id:12, name:"asdfsd",age:33,course:"asdfsd"};
+    var student1 = {id:12, name:"asdfsd",age:33,course:"asdfsd"};
     res.render("fullPage/form",{
-        student:student
+        student:student1
     });
 
 })
