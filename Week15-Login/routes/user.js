@@ -16,6 +16,22 @@ router.post("/create", function(req,res,next){
 
 });
 
+router.post("/login", function(req,res,next) {
+    var user = {};
+    user.username = req.body.username;
+    user.password = req.body.password;
+    //userDAO.checklogin(user,function(result){
+    var canLogin = true // result.canLogin
+    if (canLogin){
+        req.session.check= true;
+        req.username = user.username;
+        res.redirect("/welcome.html");
+    }else{
+        res.redirect("/login.html");
+    }
+    //})
+})
+
 router.get("/", function(req,res,next){
     console.log("in getAll");
     userDAO.getAll(function (result) {

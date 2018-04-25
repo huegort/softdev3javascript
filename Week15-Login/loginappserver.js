@@ -14,13 +14,18 @@ app.use(session({
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.all('/welcome.html', function(req,res, next){
-    console.log("checking welcome");
-    if (req.session && req.session.check){
+app.all('/*', function(req,res, next){
+    console.log("checking welcome "+req.url);
+    if (req.url == "/login.html" || req.url == "/user/login"){
         next();
     }else{
-        res.redirect('/login.html');
+        if (req.session && req.session.check){
+            next();
+        }else{
+            res.redirect('/login.html');
+        }
     }
+
 })
 
 app.use(express.static('./public'));
